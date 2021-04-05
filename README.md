@@ -10,6 +10,7 @@ The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
 * PHP v7.2+
 * CiviCRM 5+
+* Command line access for `composer install`
 
 ## Installation (Web UI)
 
@@ -31,11 +32,13 @@ Sysadmins and developers may clone the [Git](https://en.wikipedia.org/wiki/Git) 
 install it with the command-line tool [cv](https://github.com/civicrm/cv).
 
 ```bash
-git clone https://github.com/ChrisHardie/civicrm-slack-notifications.git
-cv en slacknotifications
+git clone https://github.com/ChrisHardie/civicrm-slack-notifications.git com.chrishardie.slacknotifications
+cv en com.chrishardie.slacknotifications
 ```
 
 ## Getting Started
+
+You may need to do a `composer install` to get required librarires in place.
 
 Follow [Slack's documentation to set up an Incoming Webhook](https://slack.com/help/articles/115005265063-Incoming-webhooks-for-Slack) and get the URL.
 
