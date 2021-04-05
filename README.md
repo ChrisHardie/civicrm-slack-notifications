@@ -40,7 +40,7 @@ cv en com.chrishardie.slacknotifications
 
 ## Getting Started
 
-You may need to do a `composer install` to get required librarires in place.
+You may need to do a `composer install` to get required libraries in place.
 
 Follow [Slack's documentation to set up an Incoming Webhook](https://slack.com/help/articles/115005265063-Incoming-webhooks-for-Slack) and get the URL.
 
