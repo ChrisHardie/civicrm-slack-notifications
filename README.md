@@ -36,6 +36,8 @@ git clone https://github.com/ChrisHardie/civicrm-slack-notifications.git com.chr
 cv en com.chrishardie.slacknotifications
 ```
 
+(The `cv en` command does not appear to be valid for WordPress installs.)
+
 ## Getting Started
 
 You may need to do a `composer install` to get required librarires in place.
@@ -47,6 +49,7 @@ Navigate to Administer -> System Settings -> Slack Notification Settings.
 ## Known Issues
 
 * This is the author's first CiviCRM extension and probably contains errors or failures to adhere to best practices
+* Checkboxes on settings screen have extra bullet points in front of them, weird
 * The Slack messages could be improved to be more generally useful across CiviCRM use cases
 * The list of supported objects for notifications is hardcoded but should be dynamic
 * Configuration of the Slack message icon and name must be done in the Incoming Webhook settings
