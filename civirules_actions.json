@@ -1,0 +1,7 @@
+[
+  {
+    "name": "notify_slack",
+    "label": "Send a message to Slack",
+    "class_name": "CRM_CivirulesActions_Slack_Notification"
+  }
+]
