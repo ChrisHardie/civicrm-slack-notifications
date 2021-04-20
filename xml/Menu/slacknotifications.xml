@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <menu>
-    <item>
-        <path>civicrm/admin/settings/slacknotifications</path>
-        <title>Slack notification settings</title>
-        <page_callback>CRM_Admin_Form_Generic</page_callback>
-    </item>
+  <item>
+    <path>civicrm/admin/settings/slacknotifications</path>
+    <title>Slack notification settings</title>
+    <page_callback>CRM_Admin_Form_Generic</page_callback>
+  </item>
+  <item>
+    <path>civicrm/civirule/form/action/slacknotificationdetails</path>
+    <page_callback>CRM_Slacknotifications_Form_SlackNotificationDetails</page_callback>
+    <title>SlackNotificationDetails</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
 </menu>
