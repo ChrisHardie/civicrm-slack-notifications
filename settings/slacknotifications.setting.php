@@ -18,21 +18,4 @@ return array(
 		),
 		'settings_pages'  => ['slacknotifications' => ['weight' => 5]],
 	),
-	'slacknotifications_object_types'  => array(
-		'name'            => 'slacknotifications_object_types',
-		'type'            => 'Array',
-		'add'             => '4.7',
-		'is_domain'       => 1,
-		'is_contact'      => 0,
-		'options'         => array(
-			'Individual'   => 'Individual',
-			'Contribution' => 'Contribution',
-			'Pledge'       => 'Pledge',
-		),
-		'default'		  => NULL,
-		'title'           => E::ts( 'Objects to Notify About' ),
-		'description'     => E::ts( 'Which types of objects do you want to receive Slack notifications for?' ),
-		'html_type'       => 'checkboxes',
-		'settings_pages'  => ['slacknotifications' => ['weight' => 6]],
-	),
 );

@@ -181,54 +181,54 @@ function slacknotifications_civicrm_post( $op, $objectName, $objectId, &$objectR
 		return;
 	}
 
-	if ( in_array( $objectName, array( 'Individual', 'Contribution', 'Pledge' ), true ) ) {
-		switch( $objectName) {
-			case 'Individual':
-				$display_name = sprintf( '%s (%s)', $objectRef->display_name, $objectName );
-				$url          = CRM_Utils_System::url( 'civicrm/contact/view', 'reset=1&cid=' . $objectId, true, null, false, false, true );
-				break;
-			case 'Contribution':
-				$display_name = 'Contribution #' . $objectId;
-				$url          = CRM_Utils_System::url( 'civicrm/contact/view/contribution', 'action=view&reset=1&context=home&id=' . $objectId, true, null, false, false, true );
-				break;
-			case 'Pledge':
-				$display_name = 'Pledge #' . $objectId;
-				$url          = CRM_Utils_System::url( 'civicrm/contact/view/pledge', 'action=view&reset=1&context=home&id=' . $objectId, true, null, false, false, true );
-				break;
-			default:
-				$url          = null;
-				$display_name = 'an object';
-		}
-
-		$message = sprintf(
-			'%s performed on <%s|%s>',
-			$op,
-			$url,
-			$display_name,
-		);
-
-		$client = new Maknz\Slack\Client( $slack_webhook_url );
-
-		if ( ! empty( $url ) ) {
-			$client
-				->withBlock([
-					'type'      => 'section',
-					'text'      => [
-						'type' => 'mrkdwn',
-						'text' => $message,
-					],
-					'accessory' => array(
-						'type'      => 'button',
-						'text'      => 'View Record',
-						'action_id' => 'view_civicrm_record',
-						'url'       => $url,
-					),
-				])
-				->send( $message );
-		} else {
-			$client->send( $message );
-		}
-	}
+//	if ( in_array( $objectName, array( 'Individual', 'Contribution', 'Pledge' ), true ) ) {
+//		switch( $objectName) {
+//			case 'Individual':
+//				$display_name = sprintf( '%s (%s)', $objectRef->display_name, $objectName );
+//				$url          = CRM_Utils_System::url( 'civicrm/contact/view', 'reset=1&cid=' . $objectId, true, null, false, false, true );
+//				break;
+//			case 'Contribution':
+//				$display_name = 'Contribution #' . $objectId;
+//				$url          = CRM_Utils_System::url( 'civicrm/contact/view/contribution', 'action=view&reset=1&context=home&id=' . $objectId, true, null, false, false, true );
+//				break;
+//			case 'Pledge':
+//				$display_name = 'Pledge #' . $objectId;
+//				$url          = CRM_Utils_System::url( 'civicrm/contact/view/pledge', 'action=view&reset=1&context=home&id=' . $objectId, true, null, false, false, true );
+//				break;
+//			default:
+//				$url          = null;
+//				$display_name = 'an object';
+//		}
+//
+//		$message = sprintf(
+//			'%s performed on <%s|%s>',
+//			$op,
+//			$url,
+//			$display_name,
+//		);
+//
+//		$client = new Maknz\Slack\Client( $slack_webhook_url );
+//
+//		if ( ! empty( $url ) ) {
+//			$client
+//				->withBlock([
+//					'type'      => 'section',
+//					'text'      => [
+//						'type' => 'mrkdwn',
+//						'text' => $message,
+//					],
+//					'accessory' => array(
+//						'type'      => 'button',
+//						'text'      => 'View Record',
+//						'action_id' => 'view_civicrm_record',
+//						'url'       => $url,
+//					),
+//				])
+//				->send( $message );
+//		} else {
+//			$client->send( $message );
+//		}
+//	}
 }
 
 function slacknotifications_civicrm_navigationMenu(&$menu) {
