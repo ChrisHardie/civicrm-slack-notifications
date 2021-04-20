@@ -64,7 +64,9 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 				)
 			);
 			$tp->addMessage( 'slack_message', $message, 'text/plain' );
-			$row = $tp->addRow()->context( 'contactId', $contactId );
+			$row = $tp->addRow();
+			$row->context( 'contactId', $contactId );
+			// TODO add more context depending on the action entity
 			$tp->evaluate();
 			$message = $tp->render( 'slack_message', $row );
 		}
