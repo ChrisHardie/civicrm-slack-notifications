@@ -124,7 +124,7 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 
     if (!empty($contactId)) {
       $contact = civicrm_api3('Contact', 'getsingle', ['id' => $contactId]);
-      $accessory['text'] = 'View ' . $contact->display_name;
+      $accessory['text'] = 'View ' . $contact['display_name'];
       $accessory['url'] = CRM_Utils_System::url('civicrm/contact/view', 'reset=1&cid=' . $contactId, TRUE, NULL, FALSE, FALSE, TRUE);
     }
 
