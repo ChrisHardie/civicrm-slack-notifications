@@ -27,9 +27,24 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 			'channel' => $channel,
 		);
 
+		$accessory = $this->getNotificationAccessory( $triggerData );
+
 		$client = new Maknz\Slack\Client( $slack_webhook_url, $client_settings );
 
-		$client->send( $message );
+		if ( ! empty( $accessory ) ) {
+			$client
+				->withBlock([
+					'type'      => 'section',
+					'text'      => [
+						'type' => 'mrkdwn',
+						'text' => $message,
+					],
+					'accessory' => $accessory,
+				])
+				->send( $message );
+		} else {
+			$client->send( $message );
+		}
 	}
 
 	/**
@@ -71,5 +86,26 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 			$message = $tp->render( 'slack_message', $row );
 		}
 		return $message;
+	}
+
+	protected function getNotificationAccessory( $triggerData ) {
+
+		$contactId = $triggerData->getContactId();
+
+		$accessory = array(
+			'type'      => 'button',
+			'text'      => 'View Details',
+			'action_id' => 'view_civicrm',
+			'url'       => CRM_Utils_System::url( 'civicrm' ),
+		);
+
+		if ( ! empty( $contactId ) ) {
+			$contact           = civicrm_api3('Contact', 'getsingle', ['id' => $contactId]);
+			$accessory['text'] = 'View ' . $contact->display_name;
+			$accessory['url']  = CRM_Utils_System::url( 'civicrm/contact/view', 'reset=1&cid=' . $contactId, true, null, false, false, true );
+		}
+
+		return $accessory;
+
 	}
 }
