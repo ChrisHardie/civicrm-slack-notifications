@@ -18,7 +18,14 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 
 		$action_params = $this->getActionParameters();
 
-		$client = new Maknz\Slack\Client( $slack_webhook_url );
+		$message_template = $action_params['message_template'];
+		$channel          = $action_params['channel'];
+
+		$client_settings = array(
+			'channel' => $channel,
+		);
+
+		$client = new Maknz\Slack\Client( $slack_webhook_url, $client_settings );
 
 		$client->send( 'Rule successfully triggered.' );
 	}

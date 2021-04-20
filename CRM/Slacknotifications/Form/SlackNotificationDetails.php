@@ -28,8 +28,8 @@ class CRM_Slacknotifications_Form_SlackNotificationDetails extends CRM_Civirules
 		$this->add(
 			'text', // field type
 			'channel', // field name
-			'Slack Channel (blank for default associated with incoming webhook)', // field label
-			null,
+			'Slack Channel<br />(Blank for default associated with incoming webhook.)', // field label
+			array( 'placeholder' => '#channel' ),
 			false // is required
 		);
 		$this->addButtons(
