@@ -11,6 +11,8 @@ class CRM_Slacknotifications_Form_SlackNotificationDetails extends CRM_Civirules
 	public function buildQuickForm() {
 
 		// Add form elements
+		$this->setFormTitle();
+		$this->add( 'hidden', 'rule_action_id' );
 
 		// Slack message template
 		$this->add(
@@ -33,9 +35,13 @@ class CRM_Slacknotifications_Form_SlackNotificationDetails extends CRM_Civirules
 		$this->addButtons(
 			array(
 				array(
-					'type'      => 'submit',
-					'name'      => E::ts( 'Submit' ),
-					'isDefault' => false,
+					'type'      => 'next',
+					'name'      => ts( 'Save' ),
+					'isDefault' => true,
+				),
+				array(
+					'type' => 'cancel',
+					'name' => ts( 'Cancel' ),
 				),
 			)
 		);
@@ -61,7 +67,17 @@ class CRM_Slacknotifications_Form_SlackNotificationDetails extends CRM_Civirules
 		return $defaultValues;
 	}
 
+	protected function getSubmittedData() {
+		$data = array();
+		$data['message_template'] = $this->_submitValues['message_template'];
+		$data['channel'] = $this->_submitValues['channel'];
+		return $data;
+	}
+
 	public function postProcess() {
+		$data = $this->getSubmittedData();
+		$this->ruleAction->action_params = serialize($data);
+		$this->ruleAction->save();
 		parent::postProcess();
 	}
 
