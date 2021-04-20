@@ -21,13 +21,15 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 		$message_template = $action_params['message_template'];
 		$channel          = $action_params['channel'];
 
+		$message = $this->replaceTokens( $message_template, $triggerData );
+
 		$client_settings = array(
 			'channel' => $channel,
 		);
 
 		$client = new Maknz\Slack\Client( $slack_webhook_url, $client_settings );
 
-		$client->send( 'Rule successfully triggered.' );
+		$client->send( $message );
 	}
 
 	/**
@@ -48,5 +50,24 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 		$labels['message_template'] = 'Message template: ' . $params['message_template'];
 		$labels['Channel'] = 'Channel: ' . $params['channel'];
 		return implode('<br />', $labels);
+	}
+
+	protected function replaceTokens( $template, $triggerData ) {
+		$contactId = $triggerData->getContactId();
+		$message   = $template;
+		if ( ! empty( $contactId ) && ! empty( $template ) && strpos( $template, '{' ) !== false ) {
+			$tp = new \Civi\Token\TokenProcessor(
+				\Civi::dispatcher(),
+				array(
+					'controller' => __CLASS__,
+					'smarty'     => false,
+				)
+			);
+			$tp->addMessage( 'slack_message', $message, 'text/plain' );
+			$row = $tp->addRow()->context( 'contactId', $contactId );
+			$tp->evaluate();
+			$message = $tp->render( 'slack_message', $row );
+		}
+		return $message;
 	}
 }
