@@ -30,6 +30,6 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 	 * @access public
 	 */
 	public function getExtraDataInputUrl( $ruleActionId ) {
-		return false;
+		return CRM_Utils_System::url( 'civicrm/civirule/form/action/slacknotificationdetails', 'rule_action_id='.$ruleActionId );
 	}
 }
