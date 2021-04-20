@@ -16,6 +16,8 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 			return;
 		}
 
+		$action_params = $this->getActionParameters();
+
 		$client = new Maknz\Slack\Client( $slack_webhook_url );
 
 		$client->send( 'Rule successfully triggered.' );
@@ -31,5 +33,13 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
 	 */
 	public function getExtraDataInputUrl( $ruleActionId ) {
 		return CRM_Utils_System::url( 'civicrm/civirule/form/action/slacknotificationdetails', 'rule_action_id='.$ruleActionId );
+	}
+
+	public function userFriendlyConditionParams() {
+		$params = $this->getActionParameters();
+		$labels = array();
+		$labels['message_template'] = 'Message template: ' . $params['message_template'];
+		$labels['Channel'] = 'Channel: ' . $params['channel'];
+		return implode('<br />', $labels);
 	}
 }
