@@ -128,6 +128,10 @@ class CRM_Slacknotifications_SlackNotification extends CRM_Civirules_Action {
       $accessory['url'] = CRM_Utils_System::url('civicrm/contact/view', 'reset=1&cid=' . $contactId, TRUE, NULL, FALSE, FALSE, TRUE);
     }
 
+    // @todo if we later on decide to support accessory buttons for other entity types...
+    // Contribution: CRM_Utils_System::url( 'civicrm/contact/view/contribution', 'action=view&reset=1&context=home&id=' . $objectId, true, null, false, false, true );
+    // Pledge: CRM_Utils_System::url( 'civicrm/contact/view/pledge', 'action=view&reset=1&context=home&id=' . $objectId, true, null, false, false, true );
+
     return $accessory;
 
   }
