@@ -9,13 +9,6 @@ class CRM_Slacknotifications_Upgrader extends CRM_Slacknotifications_Upgrader_Ba
   // By convention, functions that look like "function upgrade_NNNN()" are
   // upgrade tasks. They are executed in order (like Drupal's hook_update_N).
 
-	public function install(): void {
-		if ( ! method_exists( 'CRM_Civirules_Utils_Upgrader', 'insertActionsFromJson' ) ) {
-			throw new Exception( 'Method CRM_Civirules_Utils_Upgrader::insertActionsFromJson() not found. Is the CiviRules extension enabled?' );
-		}
-		CRM_Civirules_Utils_Upgrader::insertActionsFromJson( $this->extensionDir . DIRECTORY_SEPARATOR . 'civirules_actions.json' );
-	}
-
   /**
    * Example: Run an external SQL script when the module is installed.
    *
